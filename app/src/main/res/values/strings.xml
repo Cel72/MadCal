@@ -10,4 +10,10 @@
     <string name="toast_download_clicked">Download Calendar button clicked</string>
     <string name="toast_calendar_icon_clicked">Calendar icon clicked</string>
     <string name="toast_settings_icon_clicked">Settings icon clicked</string>
+    <!-- Confirmation Page -->
+    <string name="confirm_permission_title">Confirm Permission</string>
+    <string name="confirm_permission_message">Allow MadCal to modify your phone?</string>
+    <string name="no_button_text">No</string>
+    <string name="yes_button_text">Yes</string>
+    <string name="close_dialog">Close dialog</string>
 </resources>
