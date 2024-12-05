@@ -5,6 +5,9 @@
     <string name="subtitle_text">your customized events\ncalendar assistant</string>
     <string name="selection_button_text">Selection</string>
     <string name="download_button_text">Download Calendar</string>
+    <string name="downloading">DOWNLOADING...</string>
+    <string name="download_complete">Download Complete</string>
+    <string name="download_progress">Download Progress %1$d%%</string>
     <!-- Toast Messages -->
     <string name="toast_selection_clicked">Selection button clicked</string>
     <string name="toast_download_clicked">Download Calendar button clicked</string>
