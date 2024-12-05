@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.HiPlanet.Night" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Base.Theme.MadCal" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -11,9 +11,31 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Translucent and no title. -->
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
-
     </style>
+    <style name="Theme.MadCal" parent="Base.Theme.MadCal" />
 </resources>
+
+    <!--<resources xmlns:tools="http://schemas.android.com/tools">-->
+<!--    &lt;!&ndash; Base application theme. &ndash;&gt;-->
+<!--&lt;!&ndash;    <style name="Theme.HiPlanet.Night" parent="Theme.AppCompat.DayNight.NoActionBar">&ndash;&gt;-->
+<!--    <style name="Base.Theme.MadCal" parent="Theme.Material3.DayNight.NoActionBar">-->
+<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/purple_200</item>-->
+<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+<!--        <item name="colorOnPrimary">@color/black</item>-->
+<!--        &lt;!&ndash; Secondary brand color. &ndash;&gt;-->
+<!--        <item name="colorSecondary">@color/teal_200</item>-->
+<!--        <item name="colorSecondaryVariant">@color/teal_200</item>-->
+<!--        <item name="colorOnSecondary">@color/black</item>-->
+<!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+<!--        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>-->
+<!--        &lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+<!--        <item name="android:windowIsTranslucent">true</item>-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+
+<!--    </style>-->
+<!--    <style name="Theme.MadCal" parent="Base.Theme.MadCal" />-->
+<!--</resources>-->

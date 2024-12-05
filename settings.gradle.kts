@@ -21,6 +21,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Activity-App"
+rootProject.name = "MadCal"
 include(":app")
  

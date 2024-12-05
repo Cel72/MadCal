@@ -4,17 +4,19 @@ plugins {
 }
 
 android {
-    namespace = "com.hi.planet"
+    namespace = "com.cs407.madcal"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.hi.planet"
+        applicationId = "com.cs407.madcal"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
     }
 
     buildTypes {
@@ -55,9 +57,7 @@ android {
         disable.add("RtlSymmetry")
     }
 }
-
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -66,13 +66,36 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    testImplementation(libs.junit)
+    testImplementation("junit:junit:4.13.2") // Explicit JUnit dependency
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
     implementation(libs.retrofit)
     implementation(libs.retrofit.adapter.rxjava3)
     implementation(libs.retrofit.converter.gson)
-
     implementation(libs.github.jessyancoding)
 }
+
+
+//dependencies {
+//
+//    implementation(libs.androidx.core.ktx)
+//    implementation(libs.androidx.appcompat)
+//    implementation(libs.material)
+//    implementation(libs.androidx.constraintlayout)
+//    implementation(libs.androidx.lifecycle.livedata.ktx)
+//    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+//    implementation(libs.androidx.navigation.fragment.ktx)
+//    implementation(libs.androidx.navigation.ui.ktx)
+//    testImplementation(libs.junit)
+//    testImplementation(libs.junit.junit)
+//
+//
+//    androidTestImplementation(libs.androidx.junit)
+//    androidTestImplementation(libs.androidx.espresso.core)
+//
+//    implementation(libs.retrofit)
+//    implementation(libs.retrofit.adapter.rxjava3)
+//    implementation(libs.retrofit.converter.gson)
+//
+//    implementation(libs.github.jessyancoding)
+//}

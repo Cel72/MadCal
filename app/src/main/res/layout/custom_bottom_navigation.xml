@@ -7,14 +7,14 @@
     android:paddingLeft="@dimen/dp_10"
     android:paddingRight="@dimen/dp_10">
 
-    <com.hi.planet.widgets.CustomNavigationItem
+    <com.hi.madcal.widgets.CustomNavigationItem
         android:id="@+id/nav_home"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center" />
 
-    <com.hi.planet.widgets.CustomNavigationItem
+    <com.hi.madcal.widgets.CustomNavigationItem
         android:id="@+id/nav_amusement"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
@@ -26,14 +26,14 @@
         android:layout_width="@dimen/dp_48"
         android:layout_height="wrap_content" />
 
-    <com.hi.planet.widgets.CustomNavigationItem
+    <com.hi.madcal.widgets.CustomNavigationItem
         android:id="@+id/nav_mine"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center" />
     
-    <com.hi.planet.widgets.CustomNavigationItem
+    <com.hi.madcal.widgets.CustomNavigationItem
         android:id="@+id/nav_msg"
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
