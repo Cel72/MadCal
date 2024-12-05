@@ -1,19 +1,9 @@
 <resources>
-    <string name="app_name">MadCal</string>
-    <!-- Home Screen Texts -->
-    <string name="title_text">MadCal</string>
-    <string name="subtitle_text">your customized events\ncalendar assistant</string>
-    <string name="selection_button_text">Selection</string>
-    <string name="download_button_text">Download Calendar</string>
-    <!-- Toast Messages -->
-    <string name="toast_selection_clicked">Selection button clicked</string>
-    <string name="toast_download_clicked">Download Calendar button clicked</string>
-    <string name="toast_calendar_icon_clicked">Calendar icon clicked</string>
-    <string name="toast_settings_icon_clicked">Settings icon clicked</string>
-    <!-- Confirmation Page -->
-    <string name="confirm_permission_title">Confirm Permission</string>
-    <string name="confirm_permission_message">Allow MadCal to modify your phone?</string>
-    <string name="no_button_text">No</string>
-    <string name="yes_button_text">Yes</string>
-    <string name="close_dialog">Close dialog</string>
+    <string name="app_name">Activity-APP</string>
+    <string name="data">DATA</string>
+
+    <string name="title_home">Music</string>
+    <string name="title_amusement">Sport</string>
+    <string name="title_mine">Food</string>
+    <string name="title_notifications">Settings</string>
 </resources>

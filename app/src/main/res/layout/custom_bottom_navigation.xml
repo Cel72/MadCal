@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/dp_10"
+    android:paddingRight="@dimen/dp_10">
+
+    <com.hi.planet.widgets.CustomNavigationItem
+        android:id="@+id/nav_home"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <com.hi.planet.widgets.CustomNavigationItem
+        android:id="@+id/nav_amusement"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <View
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="wrap_content" />
+
+    <com.hi.planet.widgets.CustomNavigationItem
+        android:id="@+id/nav_mine"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center" />
+    
+    <com.hi.planet.widgets.CustomNavigationItem
+        android:id="@+id/nav_msg"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+
+</LinearLayout>

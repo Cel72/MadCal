@@ -1,87 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white"
-    tools:context=".MainActivity">
+    android:background="#F5F5F5">
 
-    <!-- Title Text (Positioned in Top Third) -->
-    <TextView
-        android:id="@+id/title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/title_text"
-        android:textSize="56sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/fly_nav"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp" />
-
-    <!-- Subtitle Text (Below Title in Top Third) -->
-    <TextView
-        android:id="@+id/subtitle_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/subtitle_text"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/title_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- Selection Button (Closer to Bottom) -->
-    <Button
-        android:id="@+id/selection_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/selection_button_text"
-        android:backgroundTint="@android:color/black"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@id/download_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="16dp" />
+        <FrameLayout
+            android:id="@+id/main_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <!-- Download Calendar Button (Closer to Bottom) -->
-    <Button
-        android:id="@+id/download_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="@string/download_button_text"
-        android:backgroundTint="@android:color/black"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="80dp" />
+        <FrameLayout
+            android:id="@+id/main_amusement"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <!-- Bottom Navigation Icons -->
-    <ImageView
-        android:id="@+id/calendar_icon"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_calendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp" />
 
-    <ImageView
-        android:id="@+id/settings_icon"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_settings"
+        <FrameLayout
+            android:id="@+id/main_mine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/main_msg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fly_nav"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_78"
+        android:background="@drawable/bottom_nav_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.hi.planet.widgets.CustomBottomNavigation
+            android:id="@+id/custom_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:layout_gravity="bottom" />
+
+    </FrameLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
