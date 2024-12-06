@@ -1,6 +1,5 @@
 package com.cs407.madcal
 
-
 import androidx.activity.enableEdgeToEdge
 import android.content.pm.PackageManager
 import android.os.Build
@@ -53,15 +52,12 @@ class MainActivity : AppCompatActivity() {
         downloadButton.setOnClickListener {
             if (!isPermissionGranted) {
                 if (isWritePermissionGranted()) {
-                    // If already granted, proceed with downloading
                     isPermissionGranted = true
                     startDownload()
                 } else {
-                    // Show custom permission dialog before requesting permission
                     showPermissionDialog()
                 }
             } else {
-                // Permission already granted, proceed
                 startDownload()
             }
         }
@@ -69,10 +65,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun isWritePermissionGranted(): Boolean {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            // For Android 10+, assume permission is granted
             isPermissionGranted
         } else {
-            // For Android 9 (API 28) and below, check WRITE_EXTERNAL_STORAGE
             ContextCompat.checkSelfPermission(
                 this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -80,7 +74,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Show custom permission dialog
     private fun showPermissionDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_permission, null)
         val dialog = AlertDialog.Builder(this)
@@ -94,14 +87,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         dialogView.findViewById<Button>(R.id.btn_no).setOnClickListener {
-            showAccessDeniedDialog()
+            disableDownloadButton() // Disable the button if permission is denied
             dialog.dismiss()
         }
 
         dialog.show()
     }
 
-    // Request WRITE_EXTERNAL_STORAGE permission
     private fun requestWritePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             isPermissionGranted = true
@@ -126,12 +118,16 @@ class MainActivity : AppCompatActivity() {
                 isPermissionGranted = true
                 startDownload()
             } else {
-                showAccessDeniedDialog()
+                disableDownloadButton() // Disable the button if permission is denied
             }
         }
     }
+    private fun disableDownloadButton() {
+        // Disable the button and set the color
+        downloadButton.isEnabled = false
+        downloadButton.backgroundTintList = ContextCompat.getColorStateList(this, android.R.color.darker_gray)
 
-    private fun showAccessDeniedDialog() {
+        // Show the denied message dialog
         val dialogView = layoutInflater.inflate(R.layout.dialog_access_denied, null)
         val dialog = AlertDialog.Builder(this)
             .setView(dialogView)
@@ -145,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    // Coroutine-based file downloader
+
     private suspend fun fileDownloader() {
         withContext(Dispatchers.Main) {
             downloadButton.text = getString(R.string.downloading)
@@ -156,7 +152,7 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 downloadButton.text = getString(R.string.download_progress, downloadProgress)
             }
-            delay(1000) // Simulate a download delay
+            delay(1000)
         }
 
         withContext(Dispatchers.Main) {
@@ -173,3 +169,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
