@@ -19,4 +19,8 @@
     <string name="no_button_text">No</string>
     <string name="yes_button_text">Yes</string>
     <string name="close_dialog">Close dialog</string>
+    <!-- Access Denied Dialog -->
+    <string name="access_denied_title">Access Denied</string>
+    <string name="access_denied_message">Unfortunately, we cannot provide full service to you right now. You can edit the permission later in settings.</string>
+    <string name="ok_button_text">OK</string>
 </resources>
