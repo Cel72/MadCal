@@ -65,11 +65,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Set click listener for the "Download Calendar" button
-//        downloadButton.setOnClickListener {
-//            checkPermissionAndDownload()
-//        }
-
     }
 
     private fun checkPermissionAndDownload() {
@@ -247,14 +242,6 @@ class MainActivity : AppCompatActivity() {
         downloadButton.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
     }
 
-
-//    private fun disableDownloadButton() {
-//        downloadButton.isEnabled = false
-//        downloadButton.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
-////        showAccessDeniedDialog() // Show Access Denied Dialog
-//
-//    }
-
     private fun savePermissionDeniedState(denied: Boolean) {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         sharedPreferences.edit().putBoolean(PREF_PERMISSION_DENIED, denied).apply()
@@ -264,12 +251,7 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return sharedPreferences.getBoolean(PREF_PERMISSION_DENIED, false)
     }
-    //
-//    private fun updateButtonState() {
-//        if (isPermissionDenied()) {
-//            disableDownloadButton()
-//        }
-//    }
+
     private fun updateButtonState() {
         if (isPermissionDenied()) {
             disableDownloadButton() // Disable the button and set the click listener for the dialog
