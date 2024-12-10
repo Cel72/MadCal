@@ -72,8 +72,8 @@ class AtyActivity : AppCompatActivity() {
             findViewById<CustomNavigationItem>(R.id.nav_home)
                 .apply {
                     setIcons(
-                        R.drawable.bottom_nav_home_icon_normal,
-                        R.drawable.bottom_nav_home_icon_pressed
+                        R.drawable.img_4,
+                        R.drawable.img_5
                     )
                     setTextColors(
                         ContextCompat.getColor(context, R.color.bottom_nav_selected_text_color),
@@ -85,8 +85,8 @@ class AtyActivity : AppCompatActivity() {
             findViewById<CustomNavigationItem>(R.id.nav_amusement)
                 .apply {
                     setIcons(
-                        R.drawable.bottom_nav_amusement_icon_normal,
-                        R.drawable.bottom_nav_amusement_icon_pressed
+                        R.drawable.img_2,
+                        R.drawable.img_3
                     )
                     setTextColors(
                         ContextCompat.getColor(context, R.color.bottom_nav_selected_text_color),
@@ -98,8 +98,8 @@ class AtyActivity : AppCompatActivity() {
             findViewById<CustomNavigationItem>(R.id.nav_msg)
                 .apply {
                     setIcons(
-                        R.drawable.bottom_nav_msg_icon_normal,
-                        R.drawable.bottom_nav_msg_icon_pressed
+                        R.drawable.img_6,
+                        R.drawable.img_7
                     )
                     setTextColors(
                         ContextCompat.getColor(context, R.color.bottom_nav_selected_text_color),
@@ -111,8 +111,8 @@ class AtyActivity : AppCompatActivity() {
             findViewById<CustomNavigationItem>(R.id.nav_mine)
                 .apply {
                     setIcons(
-                        R.drawable.bottom_nav_mine_icon_normal,
-                        R.drawable.bottom_nav_mine_icon_pressed
+                        R.drawable.img,
+                        R.drawable.img_1
                     )
                     setTextColors(
                         ContextCompat.getColor(context, R.color.bottom_nav_selected_text_color),
