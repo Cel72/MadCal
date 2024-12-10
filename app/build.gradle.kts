@@ -5,6 +5,7 @@ plugins {
     id("com.google.gms.google-services")
 }
 
+//
 android {
     namespace = "com.cs407.madcal"
     compileSdk = 35
