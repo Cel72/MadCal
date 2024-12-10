@@ -20,6 +20,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.cs407.madcal.databinding.AtyMainBinding
+import com.cs407.madcal.ui.main.AtyActivity
+import com.cs407.madcal.utils.ActivityUtils.startActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
@@ -52,6 +55,10 @@ class MainActivity : AppCompatActivity() {
 
         downloadButton = findViewById(R.id.download_button)
         selectionButton = findViewById(R.id.selection_button)
+        selectionButton.setOnClickListener {
+            this@MainActivity.startActivity<AtyActivity>()
+            finish()
+        }
 
         // Update the button state based on saved permission state
         updateButtonState()
@@ -72,10 +79,15 @@ class MainActivity : AppCompatActivity() {
         if (isPermissionDenied()) {
             // If permission was previously denied, disable the button and show a message
             disableDownloadButton()
-            Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT)
+                .show()
         } else {
             // Check if the calendar permission is already granted
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_CALENDAR
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 // Request permission if not granted
                 requestPermission()
             } else {
@@ -137,59 +149,77 @@ class MainActivity : AppCompatActivity() {
             val events = fetchAllEventsFromFirestore()
             withContext(Dispatchers.Main) {
                 if (events.isEmpty()) {
-                    Toast.makeText(this@MainActivity, "No events found in Firestore.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "No events found in Firestore.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     val calendarId = getPrimaryCalendarId()
                     if (calendarId == null) {
-                        Toast.makeText(this@MainActivity, "No accessible primary calendar found.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "No accessible primary calendar found.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     } else {
                         insertEventsIntoCalendar(events, calendarId)
-                        Toast.makeText(this@MainActivity, "Events added to your calendar!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Events added to your calendar!",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
         }
     }
 
-    private suspend fun fetchAllEventsFromFirestore(): List<EventData> = withContext(Dispatchers.IO) {
-        val db = FirebaseFirestore.getInstance()
-        val result = CompletableDeferred<List<EventData>>()
-        db.collection("events")
-            .get()
-            .addOnSuccessListener { documents ->
-                val events = documents.mapNotNull { doc ->
-                    val title = doc.getString("title") ?: return@mapNotNull null
-                    val description = doc.getString("description") ?: ""
-                    val location = doc.getString("location") ?: ""
-                    val timezone = doc.getString("timezone") ?: TimeZone.getDefault().id
-                    val startTimestamp = doc.getTimestamp("startTime") ?: return@mapNotNull null
-                    val endTimestamp = doc.getTimestamp("endTime") ?: return@mapNotNull null
+    private suspend fun fetchAllEventsFromFirestore(): List<EventData> =
+        withContext(Dispatchers.IO) {
+            val db = FirebaseFirestore.getInstance()
+            val result = CompletableDeferred<List<EventData>>()
+            db.collection("events")
+                .get()
+                .addOnSuccessListener { documents ->
+                    val events = documents.mapNotNull { doc ->
+                        val title = doc.getString("title") ?: return@mapNotNull null
+                        val description = doc.getString("description") ?: ""
+                        val location = doc.getString("location") ?: ""
+                        val timezone = doc.getString("timezone") ?: TimeZone.getDefault().id
+                        val startTimestamp = doc.getTimestamp("startTime") ?: return@mapNotNull null
+                        val endTimestamp = doc.getTimestamp("endTime") ?: return@mapNotNull null
 
-                    EventData(
-                        title = title,
-                        description = description,
-                        startTimeMillis = startTimestamp.toDate().time,
-                        endTimeMillis = endTimestamp.toDate().time,
-                        location = location,
-                        timezone = timezone
-                    )
+                        EventData(
+                            title = title,
+                            description = description,
+                            startTimeMillis = startTimestamp.toDate().time,
+                            endTimeMillis = endTimestamp.toDate().time,
+                            location = location,
+                            timezone = timezone
+                        )
+                    }
+                    result.complete(events)
                 }
-                result.complete(events)
-            }
-            .addOnFailureListener { e ->
-                Log.e(TAG, "Error fetching events", e)
-                result.complete(emptyList())
-            }
+                .addOnFailureListener { e ->
+                    Log.e(TAG, "Error fetching events", e)
+                    result.complete(emptyList())
+                }
 
-        return@withContext result.await()
-    }
+            return@withContext result.await()
+        }
 
     private fun getPrimaryCalendarId(): Long? {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_CALENDAR
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             return null
         }
 
-        val projection = arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.IS_PRIMARY)
+        val projection =
+            arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.IS_PRIMARY)
         val uri: Uri = CalendarContract.Calendars.CONTENT_URI
         contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
             val idIdx = cursor.getColumnIndex(CalendarContract.Calendars._ID)
@@ -203,17 +233,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        contentResolver.query(uri, arrayOf(CalendarContract.Calendars._ID), null, null, null)?.use { cursor ->
-            if (cursor.moveToFirst()) {
-                return cursor.getLong(0)
+        contentResolver.query(uri, arrayOf(CalendarContract.Calendars._ID), null, null, null)
+            ?.use { cursor ->
+                if (cursor.moveToFirst()) {
+                    return cursor.getLong(0)
+                }
             }
-        }
 
         return null
     }
 
     private fun insertEventsIntoCalendar(events: List<EventData>, calendarId: Long) {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_CALENDAR
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             Log.e(TAG, "No WRITE_CALENDAR permission.")
             return
         }
@@ -234,6 +269,7 @@ class MainActivity : AppCompatActivity() {
             contentResolver.insert(CalendarContract.Events.CONTENT_URI, values)
         }
     }
+
     private fun disableDownloadButton() {
         downloadButton.isEnabled = true // Keep the button enabled but non-functional
         downloadButton.setOnClickListener {
@@ -279,6 +315,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
 // Simple data class to hold event info
 data class EventData(
     val title: String,
