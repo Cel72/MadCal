@@ -1,16 +1,14 @@
 package com.cs407.madcal
 
 import android.Manifest
-import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -20,14 +18,20 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.cs407.madcal.databinding.AtyMainBinding
+
 import com.cs407.madcal.ui.main.AtyActivity
-import com.cs407.madcal.utils.ActivityUtils.startActivity
-import com.google.android.material.snackbar.Snackbar
+
+
+
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.*
-import java.util.*
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.util.TimeZone
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
@@ -56,7 +60,9 @@ class MainActivity : AppCompatActivity() {
         downloadButton = findViewById(R.id.download_button)
         selectionButton = findViewById(R.id.selection_button)
         selectionButton.setOnClickListener {
-            this@MainActivity.startActivity<AtyActivity>()
+
+            startActivity(Intent(this, AtyActivity::class.java))
+
             finish()
         }
 

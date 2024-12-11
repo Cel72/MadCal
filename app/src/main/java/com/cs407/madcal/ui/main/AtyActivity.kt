@@ -12,15 +12,19 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.cs407.madcal.R
-import com.cs407.madcal.databinding.ActivityMainBinding
+
 import com.cs407.madcal.databinding.AtyMainBinding
-import com.cs407.madcal.utils.StatusBarUtil
-import com.cs407.madcal.widgets.CustomBottomNavigation
-import com.cs407.madcal.widgets.CustomNavigationItem
+import com.cs407.madcal.ui.main.calendar.CalendarFragment
+
 import com.cs407.madcal.ui.main.food.FoodsFragment
 import com.cs407.madcal.ui.main.music.HomeFragment
 import com.cs407.madcal.ui.main.setting.SettingsFragment
 import com.cs407.madcal.ui.main.sport.SportFragment
+
+import com.cs407.madcal.utils.StatusBarUtil
+import com.cs407.madcal.widgets.CustomBottomNavigation
+import com.cs407.madcal.widgets.CustomNavigationItem
+
 
 class AtyActivity : AppCompatActivity() {
 
@@ -35,7 +39,10 @@ class AtyActivity : AppCompatActivity() {
         const val MODULEIDX_HOME: Int = 0
         const val MODULEIDX_AMUSEMENT: Int = 1
         const val MODULEIDX_MSG: Int = 2
-        const val MODULEIDX_MINE: Int = 3
+
+        const val MODULEIDX_CALENDAR: Int = 3
+        const val MODULEIDX_MINE: Int = 4
+
 
     }
 
@@ -46,6 +53,9 @@ class AtyActivity : AppCompatActivity() {
      */
     private var homeFragment: Fragment? = null
     private var amusementFragment: Fragment? = null
+
+    private var calendarFragment: Fragment? = null
+
     private var msgFragment: Fragment? = null
     private var mineFragment: Fragment? = null
 
@@ -94,6 +104,21 @@ class AtyActivity : AppCompatActivity() {
                     )
                     setTitle(ContextCompat.getString(context, R.string.title_amusement))
                 }
+
+
+            findViewById<CustomNavigationItem>(R.id.nav_calendar)
+                .apply {
+                    setIcons(
+                        R.drawable.img_8,
+                        R.drawable.img_9
+                    )
+                    setTextColors(
+                        ContextCompat.getColor(context, R.color.bottom_nav_selected_text_color),
+                        ContextCompat.getColor(context, R.color.bottom_nav_unselected_text_color)
+                    )
+                    setTitle(ContextCompat.getString(context, R.string.title_calendar))
+                }
+
 
             findViewById<CustomNavigationItem>(R.id.nav_msg)
                 .apply {
@@ -158,7 +183,9 @@ class AtyActivity : AppCompatActivity() {
     fun changeModule(vararg index: Int) {
         // Main Content
         val transaction = supportFragmentManager.beginTransaction()
-        hideCurFragment(transaction, moduleIdx)
+
+        hideCurFragment(transaction)
+
         when (index[0]) {
             MODULEIDX_HOME -> homeFragment?.apply {
                 transaction.show(this)
@@ -177,6 +204,7 @@ class AtyActivity : AppCompatActivity() {
             }
 
 
+
             MODULEIDX_MSG -> msgFragment?.apply {
                 transaction.show(this)
             } ?: run {
@@ -184,6 +212,16 @@ class AtyActivity : AppCompatActivity() {
                     transaction.replace(R.id.main_msg, it, MODULEIDX_MSG.toString())
                 }
             }
+
+
+            MODULEIDX_CALENDAR -> calendarFragment?.apply {
+                transaction.show(this)
+            } ?: run {
+                calendarFragment = CalendarFragment().also {
+                    transaction.replace(R.id.main_calendar, it, MODULEIDX_CALENDAR.toString())
+                }
+            }
+
 
             MODULEIDX_MINE -> mineFragment?.apply {
                 transaction.show(this)
@@ -199,31 +237,22 @@ class AtyActivity : AppCompatActivity() {
         moduleIdx = index[0]
     }
 
-    /**
-     * 关闭fragment
-     *
-     * @param transaction
-     * @param idx
-     */
-    private fun hideCurFragment(transaction: FragmentTransaction, idx: Int) {
-        when (idx) {
-            MODULEIDX_HOME -> homeFragment?.apply {
-                transaction.hide(this)
-            }
 
-            MODULEIDX_AMUSEMENT -> amusementFragment?.apply {
-                transaction.hide(this)
-            }
-
-            MODULEIDX_MSG -> msgFragment?.apply {
-                transaction.hide(this)
-            }
-
-            MODULEIDX_MINE -> mineFragment?.apply {
-                transaction.hide(this)
-            }
-
-            else -> {}
+    private fun hideCurFragment(transaction: FragmentTransaction) {
+        homeFragment?.apply {
+            transaction.hide(this)
+        }
+        amusementFragment?.apply {
+            transaction.hide(this)
+        }
+        calendarFragment?.apply {
+            transaction.hide(this)
+        }
+        msgFragment?.apply {
+            transaction.hide(this)
+        }
+        mineFragment?.apply {
+            transaction.hide(this)
         }
     }
 

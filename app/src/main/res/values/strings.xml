@@ -3,6 +3,9 @@
     <string name="data">DATA</string>
     <string name="title_home">Music</string>
     <string name="title_amusement">Sport</string>
+
+    <string name="title_calendar">Calendar</string>
+
     <string name="title_mine">Food</string>
     <string name="title_notifications">Settings</string>
 

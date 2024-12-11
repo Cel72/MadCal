@@ -1,76 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
     android:fitsSystemWindows="true">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv"
+    <TextView
+        android:layout_marginTop="80dp"
+        android:text="@string/title_text"
+        android:textSize="56sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/subtitle_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_30"
-        android:layout_marginTop="100dp"
-        android:drawableLeft="@drawable/settings"
+        android:text="@string/subtitle_text"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:gravity="center"
+        android:layout_marginTop="8dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/setting"
         android:drawablePadding="@dimen/dp_20"
-        android:gravity="center|left"
+        android:gravity="center|start"
         android:text="Setting"
         android:textColor="@color/black"
-        android:textSize="@dimen/dp_20"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/dp_20" />
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_one"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="156dp"
-        android:gravity="left|center"
-        android:paddingLeft="@dimen/dp_31"
-        android:text="Privacy"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/privacy"
+        android:drawablePadding="@dimen/dp_20"
+        android:gravity="center|start"
+        android:text="Privacy agreement"
         android:textColor="@color/black"
-        android:textSize="@dimen/dp_20"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv" />
+        android:textSize="@dimen/dp_20" />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_two"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:gravity="left|center"
-        android:paddingLeft="@dimen/dp_31"
-        android:text="Notificaiotn"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/feedback"
+        android:drawablePadding="@dimen/dp_20"
+        android:gravity="center|start"
+        android:text="Feedback"
         android:textColor="@color/black"
-        android:textSize="@dimen/dp_20"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_one" />
+        android:textSize="@dimen/dp_20" />
+
+    <View
+        android:layout_marginTop="10dp"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_three"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:gravity="left|center"
-        android:paddingLeft="@dimen/dp_31"
-        android:text="Feeedback"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/about"
+        android:drawablePadding="@dimen/dp_20"
+        android:gravity="center|start"
+        android:text="About"
         android:textColor="@color/black"
-        android:textSize="@dimen/dp_20"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_two" />
+        android:textSize="@dimen/dp_20" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_four"
+    <View
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="15dp"
-        android:gravity="left|center"
-        android:paddingLeft="@dimen/dp_31"
-        android:text="App Information"
-        android:textColor="@color/black"
-        android:textSize="@dimen/dp_20"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_three" />
+        android:layout_height="0dp"/>
+</LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
