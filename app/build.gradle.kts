@@ -35,6 +35,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
+
+    lint {
+        disable.add("SpUsage")
+        disable.add("RtlSymmetry")
+    }
 }
 
 dependencies {
@@ -46,6 +56,7 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-database")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

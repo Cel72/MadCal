@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">MadCal</string>
+    <string name="data">DATA</string>
+    <string name="title_home">Music</string>
+    <string name="title_amusement">Sport</string>
+    <string name="title_mine">Food</string>
+    <string name="title_notifications">Settings</string>
+
     <!-- Home Screen Texts -->
     <string name="title_text">MadCal</string>
     <string name="subtitle_text">your customized events\ncalendar assistant</string>

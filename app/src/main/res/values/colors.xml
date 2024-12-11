@@ -4,4 +4,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_purple">#E1BEE7</color>
 
+    <!-- =============== bottom_nav ================================================== -->
+    <color name="white_transparence_60">#99000000</color>
+    <color name="bottom_nav_selected_text_color">#FC408A</color>
+    <color name="bottom_nav_unselected_text_color">#ADADAD</color>
+
 </resources>
