@@ -220,14 +220,14 @@ class MainActivity : AppCompatActivity() {
                         val description = doc.getString("description") ?: ""
                         val location = doc.getString("location") ?: ""
                         val timezone = doc.getString("timezone") ?: TimeZone.getDefault().id
-                        val startTimestamp = doc.getTimestamp("startTime") ?: return@mapNotNull null
-                        val endTimestamp = doc.getTimestamp("endTime") ?: return@mapNotNull null
+
+                        val timeInMillis = doc.getLong("time") ?: return@mapNotNull null
 
                         EventData(
                             title = title,
                             description = description,
-                            startTimeMillis = startTimestamp.toDate().time,
-                            endTimeMillis = endTimestamp.toDate().time,
+                            startTimeMillis = timeInMillis,
+                            endTimeMillis = timeInMillis, // Using the same time for start/end as we only have one field
                             location = location,
                             timezone = timezone
                         )
