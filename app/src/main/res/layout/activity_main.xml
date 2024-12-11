@@ -84,5 +84,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp" />
+    <!-- Add this inside activity_main.xml -->
+    <FrameLayout
+        android:id="@+id/fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    app:layout_constraintTop_toBottomOf="@+id/subtitle_text"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/download_button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

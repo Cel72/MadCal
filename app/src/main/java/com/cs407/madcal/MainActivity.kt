@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
@@ -12,6 +13,7 @@ import android.provider.CalendarContract
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -22,6 +24,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.cs407.madcal.databinding.AtyMainBinding
 import com.cs407.madcal.ui.main.AtyActivity
+import com.cs407.madcal.ui.CalendarActivity
+import com.cs407.madcal.ui.main.setting.SettingsFragment
+import com.cs407.madcal.ui.main.setting.SettingsActivity
 import com.cs407.madcal.utils.ActivityUtils.startActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseApp
@@ -71,7 +76,36 @@ class MainActivity : AppCompatActivity() {
                 checkPermissionAndDownload()
             }
         }
+        val calendarIcon: ImageView = findViewById(R.id.calendar_icon)
+        val settingsIcon: ImageView = findViewById(R.id.settings_icon)
 
+        calendarIcon.setOnClickListener {
+            // This will open your CalendarActivity
+            startActivity(Intent(this, CalendarActivity::class.java))
+        }
+
+        // Settings icon opens SettingsActivity (full screen)
+        settingsIcon.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+
+    }
+    override fun onResume() {
+        super.onResume()
+        // Check if the user has granted permissions after going to system settings
+        val writeCalendarGranted = ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.WRITE_CALENDAR
+        ) == PackageManager.PERMISSION_GRANTED
+
+        if (writeCalendarGranted && isPermissionDenied()) {
+            // The user previously denied permission, but now it's granted.
+            savePermissionDeniedState(false)
+        }
+
+        // Update button state after checking the updated permission
+        updateButtonState()
     }
 
     private fun checkPermissionAndDownload() {
@@ -307,11 +341,21 @@ class MainActivity : AppCompatActivity() {
     private fun showAccessDeniedDialog() {
         AlertDialog.Builder(this)
             .setTitle("Access Denied")
-            .setMessage("Unfortunately, we cannot provide full service to you right now. You can edit the permission later in settings.")
+            .setMessage("Unfortunately, we cannot provide full service to you right now. \nYou can edit the permission later in your phone’s system setting by searching \"MadCal\" ")
+//            .setMessage("You can edit the permission later in your phone’s system setting by searching \"MadCal\" ")
+
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
+    }
+    private fun showSettingsFragment() {
+        // Show the container if not visible
+        val fragment = SettingsFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, fragment)
+            .addToBackStack(null) // allows you to navigate back
+            .commit()
     }
 
 }
