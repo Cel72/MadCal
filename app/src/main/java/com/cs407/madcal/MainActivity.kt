@@ -26,6 +26,7 @@ import com.cs407.madcal.ui.CalendarActivity
 import com.cs407.madcal.ui.main.setting.SettingsActivity
 import com.cs407.madcal.ui.main.setting.SettingsFragment
 import com.cs407.madcal.utils.ActivityUtils.startActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 
         downloadButton = findViewById(R.id.download_button)
         selectionButton = findViewById(R.id.selection_button)
-
         selectionButton.setOnClickListener {
             this@MainActivity.startActivity<AtyActivity>()
             finish()
@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity() {
         val calendarIcon: ImageView = findViewById(R.id.calendar_icon)
         val settingsIcon: ImageView = findViewById(R.id.settings_icon)
 
+        // Calendar icon opens CalendarActivity
         calendarIcon.setOnClickListener {
-            // This will open your CalendarActivity
             startActivity(Intent(this, CalendarActivity::class.java))
         }
 
@@ -112,7 +112,8 @@ class MainActivity : AppCompatActivity() {
         if (isPermissionDenied()) {
             // If permission was previously denied, disable the button and show a message
             disableDownloadButton()
-            Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT)
+                .show()
         } else {
             // Check if the calendar permission is already granted
             if (ContextCompat.checkSelfPermission(
@@ -153,12 +154,14 @@ class MainActivity : AppCompatActivity() {
                 savePermissionDeniedState(true)
                 disableDownloadButton()
                 showAccessDeniedDialog() // Show Access Denied Dialog
+
+                // Toast line commented as per original code:
+                // Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun showDownloadConfirmationDialog() {
-        // Show dialog prompting user about download
         AlertDialog.Builder(this)
             .setTitle("Download Events")
             .setMessage("If you want to download selected events, go to 'Selection'. Otherwise, we will download ALL recent events. Do you want to proceed?")
@@ -169,6 +172,7 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("NO") { dialog, _ ->
                 dialog.dismiss()
+                // Do nothing
             }
             .show()
     }
@@ -178,14 +182,26 @@ class MainActivity : AppCompatActivity() {
             val events = fetchAllEventsFromFirestore()
             withContext(Dispatchers.Main) {
                 if (events.isEmpty()) {
-                    Toast.makeText(this@MainActivity, "No events found in Firestore.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "No events found in Firestore.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     val calendarId = getPrimaryCalendarId()
                     if (calendarId == null) {
-                        Toast.makeText(this@MainActivity, "No accessible primary calendar found.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "No accessible primary calendar found.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     } else {
                         insertEventsIntoCalendar(events, calendarId)
-                        Toast.makeText(this@MainActivity, "Events added to your calendar!", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Events added to your calendar!",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -289,7 +305,7 @@ class MainActivity : AppCompatActivity() {
     private fun disableDownloadButton() {
         downloadButton.isEnabled = true // Keep the button enabled but non-functional
         downloadButton.setOnClickListener {
-            showAccessDeniedDialog()
+            showAccessDeniedDialog() // Show Access Denied dialog on click
         }
         downloadButton.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
     }
@@ -323,10 +339,8 @@ class MainActivity : AppCompatActivity() {
     private fun showAccessDeniedDialog() {
         AlertDialog.Builder(this)
             .setTitle("Access Denied")
-            .setMessage(
-                "Unfortunately, we cannot provide full service to you right now. \n" +
-                        "You can edit the permission later in your phone’s system setting by searching \"MadCal\"."
-            )
+            // This matches the original message you had (with the line break and searching 'MadCal'):
+            .setMessage("Unfortunately, we cannot provide full service to you right now. \nYou can edit the permission later in your phone’s system setting by searching \"MadCal\" ")
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
             }
@@ -334,11 +348,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showSettingsFragment() {
-        // If ever needed, you still have the option to show the SettingsFragment within this activity:
+        // This remains for if you ever want to show SettingsFragment in the same activity
         val fragment = SettingsFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, fragment)
-            .addToBackStack(null)
+            .addToBackStack(null) // allows you to navigate back
             .commit()
     }
 }

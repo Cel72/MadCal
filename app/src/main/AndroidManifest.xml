@@ -38,6 +38,8 @@
             android:theme="@style/Base.Theme.MadCal.Launcher" />
 
         <activity android:name=".ui.DeailsActivity" />
+        <activity android:name=".ui.CalendarActivity" />
+
     </application>
 
 </manifest>
