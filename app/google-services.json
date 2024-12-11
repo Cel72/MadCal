@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "536063317310",
-    "project_id": "cs407madcal",
-    "storage_bucket": "cs407madcal.firebasestorage.app"
+    "project_number": "168319446378",
+    "firebase_url": "https://madcal-6fc9f-default-rtdb.firebaseio.com",
+    "project_id": "madcal-6fc9f",
+    "storage_bucket": "madcal-6fc9f.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:536063317310:android:88d6b2dec3da9f2998086f",
+        "mobilesdk_app_id": "1:168319446378:android:6636e9b01247eff8de8913",
         "android_client_info": {
           "package_name": "com.cs407.madcal"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDVpIDgfk0UdX2YjwIryoGJUbDSHqQMT-k"
+          "current_key": "AIzaSyDaap6IHcsvH5J4YkI454J8_WO_2NSvxIE"
         }
       ],
       "services": {
