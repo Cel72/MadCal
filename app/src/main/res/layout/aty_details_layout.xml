@@ -1,5 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
@@ -14,77 +14,48 @@
             android:id="@+id/coverImage"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@android:color/darker_gray"
-            android:scaleType="centerCrop"
-            android:src="@drawable/music_one" />
+
+            android:scaleType="centerCrop" />
+
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="MUSIC TITLE"
+
+            android:text="title"
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
             android:orientation="horizontal">
+            <TextView
+                android:id="@+id/time"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/followButton"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="160dp"
-                android:text="FOLLOW"
                 android:textColor="#3299D2" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/postTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="8dp"
-            android:text="creation time: 2024-12-05"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Location: New York, USA"
-            android:textSize="14sp" />
-
+        </LinearLayout>
 
         <TextView
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Graphic introduction: Here is the detailed graphic introduction content. Here is a detailed graphic introduction. Here is a detailed graphic introduction. Here is a detailed graphic introduction. Here is a detailed graphic introduction."
-            android:textSize="16sp" />
 
-        <ImageView
-            android:id="@+id/extraImage1"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/darker_gray"
-            android:scaleType="centerCrop"
-            android:src="@drawable/music_three" />
+            android:text="description"
 
-        <TextView
-            android:id="@+id/extraText1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Graphic introduction: Here is the detailed graphic introduction content. Here is a detailed graphic introduction. Here is a detailed graphic introduction. Here is a detailed graphic introduction. Here is a detailed graphic introduction."
             android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>

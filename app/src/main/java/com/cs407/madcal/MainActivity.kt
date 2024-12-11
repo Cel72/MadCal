@@ -6,12 +6,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
@@ -25,10 +23,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.cs407.madcal.databinding.AtyMainBinding
 import com.cs407.madcal.ui.main.AtyActivity
 import com.cs407.madcal.ui.CalendarActivity
-import com.cs407.madcal.ui.main.setting.SettingsFragment
 import com.cs407.madcal.ui.main.setting.SettingsActivity
+import com.cs407.madcal.ui.main.setting.SettingsFragment
 import com.cs407.madcal.utils.ActivityUtils.startActivity
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.*
@@ -50,16 +47,17 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         FirebaseApp.initializeApp(this)
 
         downloadButton = findViewById(R.id.download_button)
         selectionButton = findViewById(R.id.selection_button)
+
         selectionButton.setOnClickListener {
             this@MainActivity.startActivity<AtyActivity>()
             finish()
@@ -67,6 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         // Update the button state based on saved permission state
         updateButtonState()
+
         downloadButton.setOnClickListener {
             if (isPermissionDenied()) {
                 // Show the "Access Denied" dialog if permission was denied
@@ -76,6 +75,7 @@ class MainActivity : AppCompatActivity() {
                 checkPermissionAndDownload()
             }
         }
+
         val calendarIcon: ImageView = findViewById(R.id.calendar_icon)
         val settingsIcon: ImageView = findViewById(R.id.settings_icon)
 
@@ -88,9 +88,8 @@ class MainActivity : AppCompatActivity() {
         settingsIcon.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
-
-
     }
+
     override fun onResume() {
         super.onResume()
         // Check if the user has granted permissions after going to system settings
@@ -113,8 +112,7 @@ class MainActivity : AppCompatActivity() {
         if (isPermissionDenied()) {
             // If permission was previously denied, disable the button and show a message
             disableDownloadButton()
-            Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT).show()
         } else {
             // Check if the calendar permission is already granted
             if (ContextCompat.checkSelfPermission(
@@ -155,8 +153,6 @@ class MainActivity : AppCompatActivity() {
                 savePermissionDeniedState(true)
                 disableDownloadButton()
                 showAccessDeniedDialog() // Show Access Denied Dialog
-
-//                Toast.makeText(this, "Permission denied. Cannot download events.", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -173,7 +169,6 @@ class MainActivity : AppCompatActivity() {
             }
             .setNegativeButton("NO") { dialog, _ ->
                 dialog.dismiss()
-                // Do nothing
             }
             .show()
     }
@@ -183,26 +178,14 @@ class MainActivity : AppCompatActivity() {
             val events = fetchAllEventsFromFirestore()
             withContext(Dispatchers.Main) {
                 if (events.isEmpty()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "No events found in Firestore.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this@MainActivity, "No events found in Firestore.", Toast.LENGTH_SHORT).show()
                 } else {
                     val calendarId = getPrimaryCalendarId()
                     if (calendarId == null) {
-                        Toast.makeText(
-                            this@MainActivity,
-                            "No accessible primary calendar found.",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@MainActivity, "No accessible primary calendar found.", Toast.LENGTH_LONG).show()
                     } else {
                         insertEventsIntoCalendar(events, calendarId)
-                        Toast.makeText(
-                            this@MainActivity,
-                            "Events added to your calendar!",
-                            Toast.LENGTH_LONG
-                        ).show()
+                        Toast.makeText(this@MainActivity, "Events added to your calendar!", Toast.LENGTH_LONG).show()
                     }
                 }
             }
@@ -252,8 +235,7 @@ class MainActivity : AppCompatActivity() {
             return null
         }
 
-        val projection =
-            arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.IS_PRIMARY)
+        val projection = arrayOf(CalendarContract.Calendars._ID, CalendarContract.Calendars.IS_PRIMARY)
         val uri: Uri = CalendarContract.Calendars.CONTENT_URI
         contentResolver.query(uri, projection, null, null, null)?.use { cursor ->
             val idIdx = cursor.getColumnIndex(CalendarContract.Calendars._ID)
@@ -307,7 +289,7 @@ class MainActivity : AppCompatActivity() {
     private fun disableDownloadButton() {
         downloadButton.isEnabled = true // Keep the button enabled but non-functional
         downloadButton.setOnClickListener {
-            showAccessDeniedDialog() // Show Access Denied dialog on click
+            showAccessDeniedDialog()
         }
         downloadButton.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
     }
@@ -324,15 +306,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateButtonState() {
         if (isPermissionDenied()) {
-            disableDownloadButton() // Disable the button and set the click listener for the dialog
+            disableDownloadButton()
         } else {
             downloadButton.isEnabled = true
             downloadButton.setBackgroundColor(ContextCompat.getColor(this, R.color.black))
             downloadButton.setOnClickListener {
                 if (isPermissionDenied()) {
-                    showAccessDeniedDialog() // Just in case of a late change
+                    showAccessDeniedDialog()
                 } else {
-                    checkPermissionAndDownload() // Regular download logic
+                    checkPermissionAndDownload()
                 }
             }
         }
@@ -341,23 +323,24 @@ class MainActivity : AppCompatActivity() {
     private fun showAccessDeniedDialog() {
         AlertDialog.Builder(this)
             .setTitle("Access Denied")
-            .setMessage("Unfortunately, we cannot provide full service to you right now. \nYou can edit the permission later in your phone’s system setting by searching \"MadCal\" ")
-//            .setMessage("You can edit the permission later in your phone’s system setting by searching \"MadCal\" ")
-
+            .setMessage(
+                "Unfortunately, we cannot provide full service to you right now. \n" +
+                        "You can edit the permission later in your phone’s system setting by searching \"MadCal\"."
+            )
             .setPositiveButton("OK") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
     }
+
     private fun showSettingsFragment() {
-        // Show the container if not visible
+        // If ever needed, you still have the option to show the SettingsFragment within this activity:
         val fragment = SettingsFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container_view, fragment)
-            .addToBackStack(null) // allows you to navigate back
+            .addToBackStack(null)
             .commit()
     }
-
 }
 
 // Simple data class to hold event info

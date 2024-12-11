@@ -22,12 +22,17 @@
         android:layout_weight="1"
         android:gravity="center" />
 
-    <View
-        android:layout_width="@dimen/dp_48"
-        android:layout_height="wrap_content" />
 
     <com.cs407.madcal.widgets.CustomNavigationItem
         android:id="@+id/nav_mine"
+        android:layout_width="@dimen/dp_0"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <com.cs407.madcal.widgets.CustomNavigationItem
+        android:id="@+id/nav_calendar"
+
         android:layout_width="@dimen/dp_0"
         android:layout_height="wrap_content"
         android:layout_weight="1"
