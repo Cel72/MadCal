@@ -36,7 +36,6 @@
         <activity
             android:name=".ui.main.AtyActivity"
             android:theme="@style/Base.Theme.MadCal.Launcher" />
-        <activity android:name=".ui.CalendarActivity" />
         <activity android:name=".ui.DeailsActivity" />
     </application>
 

@@ -27,6 +27,8 @@ class CustomBottomNavigation @JvmOverloads constructor(
         items.add(findViewById(R.id.nav_home))
         items.add(findViewById(R.id.nav_amusement))
         items.add(findViewById(R.id.nav_mine))
+        items.add(findViewById(R.id.nav_calendar))
+
         items.add(findViewById(R.id.nav_msg))
 
         setupClickListeners()

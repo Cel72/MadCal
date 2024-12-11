@@ -10,6 +10,7 @@ import com.cs407.madcal.model.NewsItem
 import com.cs407.madcal.utils.CacheUtils
 import com.cs407.madcal.utils.NewsItemUtils.setImageUrl
 import com.cs407.madcal.utils.StatusBarUtil
+import com.cs407.madcal.utils.TimeUtils
 
 
 class DeailsActivity : AppCompatActivity() {
@@ -27,6 +28,9 @@ class DeailsActivity : AppCompatActivity() {
 
         val title: TextView = findViewById(R.id.title)
         title.text = newsItem.title
+
+        val time: TextView = findViewById(R.id.time)
+        time.text = TimeUtils.getSpecificTime(newsItem.time)
 
         val description: TextView = findViewById(R.id.description)
         description.text = newsItem.description
