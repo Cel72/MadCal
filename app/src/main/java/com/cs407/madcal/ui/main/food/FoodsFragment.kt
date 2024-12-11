@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.cs407.madcal.databinding.FragmentNotificationsBinding
 import com.cs407.madcal.ui.main.music.adapter.MusicAdapter
 import com.cs407.madcal.utils.NewsItemUtils
+
 
 class FoodsFragment : Fragment() {
 
@@ -30,10 +32,12 @@ class FoodsFragment : Fragment() {
 
         binding.rvMusic.layoutManager = LinearLayoutManager(activity)
 
+
         NewsItemUtils.getItems("food"){
             val adapter = MusicAdapter(it, activity as Context)
             binding.rvMusic.adapter = adapter
         }
+
         return root
     }
 

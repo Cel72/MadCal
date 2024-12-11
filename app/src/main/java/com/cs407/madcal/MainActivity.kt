@@ -18,7 +18,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+
 import com.cs407.madcal.ui.main.AtyActivity
+
+
+
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CompletableDeferred
@@ -56,7 +60,9 @@ class MainActivity : AppCompatActivity() {
         downloadButton = findViewById(R.id.download_button)
         selectionButton = findViewById(R.id.selection_button)
         selectionButton.setOnClickListener {
+
             startActivity(Intent(this, AtyActivity::class.java))
+
             finish()
         }
 

@@ -1,3 +1,4 @@
+
 package com.cs407.madcal.model
 
 data class NewsItem(

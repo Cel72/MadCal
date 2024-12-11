@@ -1,6 +1,7 @@
 package com.cs407.madcal.ui
 
 import android.os.Bundle
+
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +19,12 @@ class DeailsActivity : AppCompatActivity() {
         var newsItem = NewsItem(0,"","","")
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         StatusBarUtil.setImageImmersive(this, isLightStatusBar = true)
         setContentView(R.layout.aty_details_layout)
+
 
         val coverImage: ImageView = findViewById(R.id.coverImage)
         coverImage.setImageUrl(newsItem.photo)
